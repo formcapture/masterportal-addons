@@ -1,0 +1,14 @@
+{
+  "modules": {
+    "tools": {
+      "embedit": {
+        "name": "Embedit",
+        "errorMsg": {
+          "config": "Invalide URL. Bitte überprüfen Sie die Addon Konfiguration.",
+          "selectionLayer": "Der Layer für die Feature-Selektion mit der ID {{layerId}} existiert nicht. Bitte überprüfen Sie Ihre Konfiguration."
+        }
+      }
+    }
+  }
+}
+
