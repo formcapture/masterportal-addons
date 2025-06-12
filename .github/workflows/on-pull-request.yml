@@ -1,4 +1,4 @@
-name: Test successful build of masterportal-addons on pull request
+name: Test successful lint of masterportal-addons on pull request
 
 on: pull_request
 

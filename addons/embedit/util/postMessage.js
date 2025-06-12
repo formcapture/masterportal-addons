@@ -1,6 +1,6 @@
-import GeoJSON from "ol/format/GeoJSON";
+import GeoJSON from 'ol/format/GeoJSON';
 
-import {SEND_EVENTS} from "../constants/events";
+import { SEND_EVENTS } from '../constants/events';
 
 /**
  * Sends a message to the form iframe.
@@ -10,11 +10,11 @@ import {SEND_EVENTS} from "../constants/events";
  * @return {void}
  */
 function sendMessage (content, url, fallbackUrl) {
-    const iframe = document.getElementById("embedit-iframe");
+    const iframe = document.getElementById('embedit-iframe');
 
     if (!iframe) {
         // eslint-disable-next-line no-console
-        console.log("Failed to post message. Cannot find target iframe element.");
+        console.log('Failed to post message. Cannot find target iframe element.');
         return;
     }
 
@@ -34,13 +34,13 @@ function sendMessage (content, url, fallbackUrl) {
  * Send the endDrawing message
  * @param {Object} param0 The content.
  * @param {Object} param0.feature The feature to send.
- * @param {String} param0.id The id of the feature.
+ * @param {String} param0.itemId The id of the feature.
  * @param {String} param0.projection The epsg code of the feature.
  * @param {String} url The url of the form iframe.
  * @param {String} fallbackUrl The url to use if the originUrl is invalid (e.g. relative url).
  * @return {void}
  */
-export function sendFeature ({feature, itemId, columnId, projection}, url, fallbackUrl) {
+export function sendFeature ({ feature, itemId, columnId, projection }, url, fallbackUrl) {
     const format = new GeoJSON({
             dataProjection: projection,
             featureProjection: projection
@@ -117,8 +117,7 @@ export function receiveMessage (originUrl, message, fallbackUrl) {
 
     try {
         urlInst = new URL(originUrl);
-    }
-    catch {
+    } catch {
         urlInst = new URL(fallbackUrl);
     }
 
