@@ -4,7 +4,9 @@ import styleList from '@masterportal/masterportalapi/src/vectorStyle/styleList';
 export function getStyleFunction(styleId) {
     return (ft) => {
         const styleObject = styleList.returnStyleObject(styleId);
-        return createStyle.createStyle(styleObject, ft);
+        const style = createStyle.createStyle(styleObject, ft, false, Config?.wfsImgPath);
+
+        return style;
     }
 }
 

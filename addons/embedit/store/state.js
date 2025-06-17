@@ -10,17 +10,17 @@
  */
 
 const state = {
-    id: 'embedit',
-    name: 'additional:modules.tools.embedit.name',
-    icon: 'bi-pencil-square',
-    deactivateGFI: false,
-    supportedMapModes: [ '2D' ],
-    url: undefined,
-    defaultStyleId: undefined,
-    highlightStyleId: undefined,
-    drawStyleId: undefined,
-    drawIndicatorStyleId: undefined,
-    hoverStyleId: undefined
+    defaultStyleId: "",
+    drawIndicatorStyleId: "",
+    drawStyleId: "",
+    highlightStyleId: "",
+    hoverStyleId: "",
+    icon: "bi-pencil-square",
+    id: "embedit",
+    name: "additional:modules.tools.embedit.name",
+    styleId: [],
+    supportedMapModes: ["2D"],
+    url: ""
 };
 
 export default state;

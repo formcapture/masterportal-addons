@@ -17,7 +17,7 @@ import { INTERACTIONS } from '../constants/interactions';
 import { LAYER_NAMES } from '../constants/layerNames';
 import actions from '../store/actions';
 import getters from '../store/getters';
-import { getFeatureByIds, hasEqualId } from '../util/features';
+import { getFeatureByIds, hasEqualId, getExtraProperties } from "../util/features";
 import {
     receiveMessage,
     sendDrawingStarted,
@@ -83,17 +83,23 @@ export default {
         this.unregisterListener();
     },
     methods: {
-        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent' ]),
-        ...mapActions('Modules/Embedit', Object.keys(actions)),
-        ...mapActions('Alerting', [ 'addSingleAlert' ]),
-        addFeatureTo (itemId, columnId, geom, layer) {
+        ...mapActions("Maps", ["addNewLayerIfNotExists", "addInteraction", "removeInteraction", "zoomToExtent"]),
+        ...mapActions("Modules/Embedit", Object.keys(actions)),
+        ...mapActions("Alerting", ["addSingleAlert"]),
+        addFeatureTo (itemId, columnId, geom, extraProperties, layer) {
             const feature = new Feature(new GeoJSON({
                 dataProjection: this.projectionCode,
                 featureProjection: this.projectionCode
             }).readGeometry(geom));
 
-            feature.set('itemId', itemId);
-            feature.set('columnId', columnId);
+            feature.set("itemId", itemId);
+            feature.set("columnId", columnId);
+            // set extra properties if provided
+            if (extraProperties) {
+                Object.keys(extraProperties).forEach(key => {
+                    feature.set(key, extraProperties[key]);
+                });
+            }
             layer.getSource().addFeature(feature);
         },
         removeFeatureFrom (itemId, columnId, layer) {
@@ -285,7 +291,7 @@ export default {
                 if (geom) {
                     // for start we assume to receive a geojson geometry
                     // TODO check the payload
-                    this.addFeatureTo(itemId, columnId, geom, drawLayer);
+                    this.addFeatureTo(itemId, columnId, geom, undefined, drawLayer);
                 }
             }
             this.startInteraction(INTERACTIONS.draw);
@@ -316,7 +322,8 @@ export default {
                         return;
                     }
                 }
-                this.addFeatureTo(item.itemId, item.columnId, item.geom, highlightLayer);
+                const extraProperties = getExtraProperties(item) || undefined;
+                this.addFeatureTo(item.itemId, item.columnId, item.geom, extraProperties, highlightLayer);
             }, this);
         },
         onDisplayFormData (payload) {
@@ -326,22 +333,12 @@ export default {
             this.clearHighlightLayer();
 
             payload.forEach(item => {
-                this.addFeatureTo(item.itemId, item.columnId, item.geom, displayLayer);
+                const extraProperties = getExtraProperties(item) || undefined;
+                this.addFeatureTo(item.itemId, item.columnId, item.geom, extraProperties, displayLayer);
             }, this);
         },
         onStopHighlighting () {
             this.clearHighlightLayer();
-        },
-        onUpdateHighlightingWith (payload) {
-            const { geom, itemId, columnId } = payload,
-                highlightLayer = this.getLayerById(LAYER_NAMES.HIGHLIGHT_LAYER);
-
-            if (!columnId || !geom) {
-                return;
-            }
-
-            this.removeFeatureFrom(itemId, columnId, highlightLayer);
-            this.addFeatureTo(itemId, columnId, geom, highlightLayer);
         },
         onStartSelecting (payload) {
             const { layerId, itemId, columnId } = payload,
@@ -451,7 +448,7 @@ export default {
                 this.removeFeatureFrom(itemId, columnId, highlightLayer);
                 if (geom) {
                     // for start we assume to receive a geojson geometry
-                    this.addFeatureTo(itemId, columnId, geom, drawLayer);
+                    this.addFeatureTo(itemId, columnId, geom, undefined, drawLayer);
                 }
             }
             this.initModifyInteraction({
@@ -551,9 +548,6 @@ export default {
                     break;
                 case RECEIVE_EVENTS.stopHighlighting:
                     this.onStopHighlighting();
-                    break;
-                case RECEIVE_EVENTS.updateHighlightingWith:
-                    this.onUpdateHighlightingWith(evtPayload);
                     break;
                 case RECEIVE_EVENTS.displayFormData:
                     this.onDisplayFormData(evtPayload);
