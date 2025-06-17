@@ -10,11 +10,11 @@
  */
 
 const state = {
-    id: "embedit",
-    name: "additional:modules.tools.embedit.name",
-    icon: "bi-pencil-square",
+    id: 'embedit',
+    name: 'additional:modules.tools.embedit.name',
+    icon: 'bi-pencil-square',
     deactivateGFI: false,
-    supportedMapModes: ["2D"],
+    supportedMapModes: [ '2D' ],
     url: undefined,
     defaultStyleId: undefined,
     highlightStyleId: undefined,

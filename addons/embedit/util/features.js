@@ -1,6 +1,6 @@
 export const getFeatureByIds = (itemId, columnId, layer) => {
     return layer.getSource().getFeatures().filter(
-        (feature) => feature.get("itemId") === itemId && feature.get("columnId") === columnId
+        (feature) => feature.get('itemId') === itemId && feature.get('columnId') === columnId
     );
 };
 

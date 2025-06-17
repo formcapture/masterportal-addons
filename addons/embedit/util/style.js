@@ -1,12 +1,10 @@
-import styleList from "@masterportal/masterportalapi/src/vectorStyle/styleList";
-import createStyle from "@masterportal/masterportalapi/src/vectorStyle/createStyle";
+import createStyle from '@masterportal/masterportalapi/src/vectorStyle/createStyle';
+import styleList from '@masterportal/masterportalapi/src/vectorStyle/styleList';
 
 export function getStyleFunction(styleId) {
     return (ft) => {
         const styleObject = styleList.returnStyleObject(styleId);
-        const style = createStyle.createStyle(styleObject, ft);
-
-        return style;
+        return createStyle.createStyle(styleObject, ft);
     }
 }
 
@@ -16,22 +14,20 @@ export function getDefaultHoverStyleFunction() {
         const geomType = ft.getGeometry().getType();
         let styleId;
         switch (geomType) {
-            case "Polygon":
-                styleId = "defaultHighlightFeaturesPolygon";
+            case 'Polygon':
+                styleId = 'defaultHighlightFeaturesPolygon';
                 break;
-            case "LineString":
-                styleId = "defaultHighlightFeaturesLine";
+            case 'LineString':
+                styleId = 'defaultHighlightFeaturesLine';
                 break;
-            case "Point":
-                styleId = "defaultHighlightFeaturesPoint";
+            case 'Point':
+                styleId = 'defaultHighlightFeaturesPoint';
                 break;
             default:
-                styleId = "defaultHighlightFeaturesPolygon";
+                styleId = 'defaultHighlightFeaturesPolygon';
                 break;
         }
         const styleObject = styleList.returnStyleObject(styleId);
-        const style = createStyle.createStyle(styleObject, ft);
-
-        return style;
+        return createStyle.createStyle(styleObject, ft);
     }
 }

@@ -1,0 +1,30 @@
+name: Test successful lint of masterportal-addons on pull request
+
+on: pull_request
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources 🔰
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 🧮
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache Node.js modules 💾
+        uses: actions/cache@v4
+        with:
+          path: ~/app/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install dependencies ⏬
+        run: npm ci
+
+      - name: Run typecheck, lint and tests 🧪
+        run: npm run lint
