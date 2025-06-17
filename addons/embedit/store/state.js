@@ -1,26 +1,31 @@
 /**
- * User type definition
+ * Embedit addon state definition
  * @typedef {Object} EmbeditAddonState
- * @property {String} id id of the viewer component
- * @property {String} name displayed as title (config-param)
- * @property {String} icon icon next to title (config-param)
- * @property {Boolean} deactivateGFI flag if tool should deactivate gfi (config-param)
- * @property {String[]} supportedMapModes supported map modes
- * @property {String} url The url of the form iframe
+ * @property {String} defaultStyleId The default style ID
+ * @property {String} drawIndicatorStyleId The style ID for draw indicator
+ * @property {String} drawStyleId The style ID for drawing
+ * @property {String} highlightStyleId The style ID for highlighting
+ * @property {String} hoverStyleId The style ID for hover effect
+ * @property {String} icon Icon next to title
+ * @property {String} id ID of the viewer component
+ * @property {String} name Displayed as title
+ * @property {String[]} styleId List of all style IDs that are used by the addon
+ * @property {String[]} supportedMapModes Supported map modes
+ * @property {String} url The URL of the form iframe
  */
 
 const state = {
+    defaultStyleId: undefined,
+    drawIndicatorStyleId: undefined,
+    drawStyleId: undefined,
+    highlightStyleId: undefined,
+    hoverStyleId: undefined,
+    icon: 'bi-pencil-square',
     id: 'embedit',
     name: 'additional:modules.tools.embedit.name',
-    icon: 'bi-pencil-square',
-    deactivateGFI: false,
+    styleId: undefined,
     supportedMapModes: [ '2D' ],
-    url: undefined,
-    defaultStyleId: undefined,
-    highlightStyleId: undefined,
-    drawStyleId: undefined,
-    drawIndicatorStyleId: undefined,
-    hoverStyleId: undefined
+    url: undefined
 };
 
 export default state;

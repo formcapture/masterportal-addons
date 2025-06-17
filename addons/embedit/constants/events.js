@@ -32,11 +32,6 @@ export const RECEIVE_EVENTS = {
          */
         stopModify: 'embedit/stopModify',
         /**
-         * Update the features in the highlight layer with the given data.
-         * Replaces existing feature with the same column name or adds new feature.
-         */
-        updateHighlightingWith: 'embedit/updateHighlightingWith',
-        /**
          * Creates selection interaction with a specific layer filter.
          */
         startSelecting: 'embedit/startSelecting',
