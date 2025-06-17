@@ -20,11 +20,11 @@ const state = {
     drawStyleId: undefined,
     highlightStyleId: undefined,
     hoverStyleId: undefined,
-    icon: "bi-pencil-square",
-    id: "embedit",
-    name: "additional:modules.tools.embedit.name",
+    icon: 'bi-pencil-square',
+    id: 'embedit',
+    name: 'additional:modules.tools.embedit.name',
     styleId: undefined,
-    supportedMapModes: ["2D"],
+    supportedMapModes: [ '2D' ],
     url: undefined
 };
 

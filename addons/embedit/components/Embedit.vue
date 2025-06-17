@@ -17,7 +17,7 @@ import { INTERACTIONS } from '../constants/interactions';
 import { LAYER_NAMES } from '../constants/layerNames';
 import actions from '../store/actions';
 import getters from '../store/getters';
-import { getFeatureByIds, hasEqualId, getExtraProperties } from "../util/features";
+import { getFeatureByIds, hasEqualId, getExtraProperties } from '../util/features';
 import {
     receiveMessage,
     sendDrawingStarted,
@@ -83,17 +83,17 @@ export default {
         this.unregisterListener();
     },
     methods: {
-        ...mapActions("Maps", ["addNewLayerIfNotExists", "addInteraction", "removeInteraction", "zoomToExtent"]),
-        ...mapActions("Modules/Embedit", Object.keys(actions)),
-        ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent' ]),
+        ...mapActions('Modules/Embedit', Object.keys(actions)),
+        ...mapActions('Alerting', [ 'addSingleAlert' ]),
         addFeatureTo (itemId, columnId, geom, extraProperties, layer) {
             const feature = new Feature(new GeoJSON({
                 dataProjection: this.projectionCode,
                 featureProjection: this.projectionCode
             }).readGeometry(geom));
 
-            feature.set("itemId", itemId);
-            feature.set("columnId", columnId);
+            feature.set('itemId', itemId);
+            feature.set('columnId', columnId);
             // set extra properties if provided
             if (extraProperties) {
                 Object.keys(extraProperties).forEach(key => {

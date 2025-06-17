@@ -22,7 +22,6 @@ export default [
         rules: {
             'no-debugger': 'error',
             'no-console': 'warn',
-            'no-undef': 'warn', // maybe required since Masterportal defines globals
             'vue/no-unused-vars': 'error',
             'vue/multi-word-component-names': 'warn',
             'vuejs-accessibility/alt-text': 'error',
@@ -51,7 +50,14 @@ export default [
             ecmaVersion: 2022,
             sourceType: 'module',
             globals: {
-                ...globals.browser
+                ...globals.browser,
+                '$': true,
+                '_': true,
+                'Config': true,
+                'Cesium': true,
+                'i18next': true,
+                'mapCollection': true,
+                'moduleCollection': true
             }
         }
     }

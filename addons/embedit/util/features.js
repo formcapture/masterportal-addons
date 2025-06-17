@@ -9,8 +9,8 @@ export const hasEqualId = (id1, id2) => {
 };
 
 export const getExtraProperties = (item) => {
-    const exclude = new Set(["itemId", "columnId", "id", "geom"]);
+    const exclude = new Set([ 'itemId', 'columnId', 'id', 'geom' ]);
     return Object.fromEntries(
-        Object.entries(item).filter(([key]) => !exclude.has(key))
+        Object.entries(item).filter(([ key ]) => !exclude.has(key))
     );
 };
