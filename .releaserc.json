@@ -18,7 +18,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "rm *.zip && zip -r masterportal-addons-release-${nextRelease.version}.zip addons/"
+        "prepareCmd": "rm -f *.zip && zip -r masterportal-addons-release-${nextRelease.version}.zip addons/"
       }
     ],
     [
