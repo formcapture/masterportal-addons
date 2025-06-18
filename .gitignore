@@ -3,3 +3,6 @@ node_modules
 # IntelliJ IDEA
 .idea
 *.iml
+
+# Created ZIP files
+masterportal-addons-release-*.zip
