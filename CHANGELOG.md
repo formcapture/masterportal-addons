@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/formcapture/masterportal-addons/compare/v1.0.0...v1.0.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* use provided geomType in create mode ([b05a3a6](https://github.com/formcapture/masterportal-addons/commit/b05a3a63c4f5d4249f5c1e428ef2a24017b558fe))
+
 # 1.0.0 (2025-06-24)
 
 
