@@ -272,9 +272,14 @@ export default {
         },
         onStartDrawing (payload) {
             const { geom, itemId, columnId, geomType } = payload,
-                type = (geom && geom.type) !== undefined ? geom.type : (geomType !== undefined ? geomType : 'Point'),
                 drawLayer = this.getLayerById(LAYER_NAMES.DRAW_LAYER),
                 highlightLayer = this.getLayerById(LAYER_NAMES.HIGHLIGHT_LAYER);
+
+            let type = (geom && geom.type) !== undefined ? geom.type : (geomType !== undefined ? geomType : 'Point')
+            if (type === '' || geom === '' || itemId === 0) {
+                // create mode => explicitly use geomType
+                type = geomType !== undefined ? geomType : 'Point';
+            }
 
             this.resetDrawState();
 
