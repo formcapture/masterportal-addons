@@ -61,7 +61,11 @@ export const RECEIVE_EVENTS = {
         /**
          * Disables item selection on the map.
          */
-        disableItemSelection: 'embedit/disableItemSelection'
+        disableItemSelection: 'embedit/disableItemSelection',
+        /**
+         * Refreshes layer source of a given layer id.
+         */
+        refreshLayer: 'embedit/refreshLayer'
     },
 
     // Events that will be sent by the embedit addon

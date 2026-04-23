@@ -83,7 +83,7 @@ export default {
         this.unregisterListener();
     },
     methods: {
-        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent' ]),
+        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent', 'getLayerById' ]),
         ...mapActions('Modules/Embedit', Object.keys(actions)),
         ...mapActions('Alerting', [ 'addSingleAlert' ]),
         addFeatureTo (itemId, columnId, geom, extraProperties, layer) {
@@ -569,6 +569,9 @@ export default {
                 case RECEIVE_EVENTS.disableItemSelection:
                     this.disableItemSelection();
                     break;
+                case RECEIVE_EVENTS.refreshLayer:
+                    this.refreshLayer(evtPayload);
+                    break;
                 default:
                     break;
             }
@@ -595,6 +598,12 @@ export default {
         },
         stopInteraction (id) {
             this.getInteractionById(id).setActive(false);
+        },
+        refreshLayer (id) {
+            const layer = this.getLayerById(id);
+            if (layer) {
+                layer.getSource().refresh();
+            }
         }
     }
 };
