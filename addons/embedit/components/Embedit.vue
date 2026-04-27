@@ -83,7 +83,7 @@ export default {
         this.unregisterListener();
     },
     methods: {
-        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent', 'getLayerById' ]),
+        ...mapActions('Maps', [ 'addNewLayerIfNotExists', 'addInteraction', 'removeInteraction', 'zoomToExtent' ]),
         ...mapActions('Modules/Embedit', Object.keys(actions)),
         ...mapActions('Alerting', [ 'addSingleAlert' ]),
         addFeatureTo (itemId, columnId, geom, extraProperties, layer) {
@@ -602,7 +602,7 @@ export default {
         refreshLayer (id) {
             const layer = this.getLayerById(id);
             if (layer) {
-                layer.getSource().refresh();
+                layer.getSource()?.refresh();
             }
         }
     }
