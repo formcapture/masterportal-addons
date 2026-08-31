@@ -1,5 +1,5 @@
 # build stage
-FROM node:20.16.0-alpine AS build
+FROM node:25.8.0-alpine AS build
 
 # libs are needed to build the masterportal
 RUN apk update && apk add --no-cache --virtual .gyp \
@@ -24,7 +24,7 @@ RUN sed -i 's/return folderName;/return stableVersionNumber;/g' devtools/tasks/g
 RUN npm ci && echo "" | npm run build
 
 # webserver stage
-FROM nginx:1.29.3-alpine-slim
+FROM nginx:1.29.6-alpine-slim
 
 ARG GIT_COMMIT
 ARG APP_VERSION
