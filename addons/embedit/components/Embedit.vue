@@ -334,10 +334,15 @@ export default {
         onDisplayFormData (payload) {
             const displayLayer = this.getLayerById(LAYER_NAMES.DISPLAY_LAYER);
 
-            this.clearDisplayLayer();
             this.clearHighlightLayer();
 
-            payload.forEach(item => {
+            const features = Array.isArray(payload) ? payload : (payload?.features || []);
+            if (!Array.isArray(payload) && payload?.clear) {
+                this.clearDisplayLayer();
+            }
+
+            features.forEach(item => {
+                this.removeFeatureFrom(item.itemId, item.columnId, displayLayer);
                 const extraProperties = getExtraProperties(item) || undefined;
                 this.addFeatureTo(item.itemId, item.columnId, item.geom, extraProperties, displayLayer);
             }, this);
